@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "dotenv_editor/version"
+require_relative "dotenv_editor/parser"
+require_relative "dotenv_editor/parsed_dotenv"
 
 module DotenvEditor
   class Error < StandardError; end
