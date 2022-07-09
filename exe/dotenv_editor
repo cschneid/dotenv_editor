@@ -1,3 +1,27 @@
 #!/usr/bin/env ruby
 
 require "dotenv_editor"
+
+filename = ARGV[0]
+
+dotenv = DotenvEditor::Dotenv.new(File.read(filename))
+
+commands = ARGV[1..]
+
+while commands.any?
+  command = commands.shift
+  if command == "value"
+    key = commands.shift
+    raise "Missing key argument for value command" if key.nil?
+    puts dotenv.value(key)
+  end
+
+  if command == "set"
+    key = commands.shift
+    value = commands.shift
+    raise "Missing key argument for set command" if key.nil?
+    raise "Missing value argument for set command" if value.nil?
+    dotenv.set(key, value)
+    puts dotenv.to_env
+  end
+end

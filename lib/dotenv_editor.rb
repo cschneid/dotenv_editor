@@ -2,7 +2,7 @@
 
 require_relative "dotenv_editor/version"
 require_relative "dotenv_editor/parser"
-require_relative "dotenv_editor/parsed_dotenv"
+require_relative "dotenv_editor/dotenv"
 
 module DotenvEditor
   class Error < StandardError; end
