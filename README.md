@@ -1,12 +1,14 @@
 # DotenvEditor
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/dotenv_editor`. To experiment with that code, run `bin/console` for an interactive prompt.
+A simple library and command line tool to add or edit keys in a dotenv file. I
+borrowed the parser from the dotenv gem so everything should parse identically.
 
-TODO: Delete this and the text above, and describe your gem
+This library stops parsing before the official dotenv lib though, no var
+substitution happens, so you can read and set values "raw" before they get fully
+resolved.
+
 
 ## Installation
-
-Add this line to your application's Gemfile:
 
 ```ruby
 gem 'dotenv_editor'
@@ -22,7 +24,32 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+dotenv_editor env_file [commands] 
+
+commands:
+    value key - reads a value and prints it
+    set key value - overwrites existing, or creates a new line with the specified value 
+```
+
+```
+# Simple lookup
+
+ruby -Ilib exe/dotenv_editor spec/fixtures/basic.env value A
+#=> b
+
+
+# Multiline output
+
+ruby -Ilib exe/dotenv_editor spec/fixtures/basic.env value E
+#=> f
+#=> g
+
+
+# Setting a key. This writes the edited file out to stdout. Original is unchanged
+
+ruby -Ilib exe/dotenv_editor spec/fixtures/basic.env set G '"this is g"'
+```
 
 ## Development
 
@@ -32,7 +59,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/dotenv_editor.
+Bug reports and pull requests are welcome on GitHub at https://github.com/cschneid/dotenv_editor.
 
 ## License
 
