@@ -6,7 +6,7 @@ filename = ARGV[0]
 
 dotenv = DotenvEditor::Dotenv.new(File.read(filename))
 
-commands = ARGV[1..]
+commands = ARGV[1..-1]
 
 while commands.any?
   command = commands.shift
